@@ -1,4 +1,4 @@
-# Printers side quest
+# HevORT side quest
 
 ```
 ├─ Fan/                         # Обдув для Dragon
@@ -10,4 +10,6 @@
 └─ HevORT.orca_printer          # Последняя рабочая конфигурация
 ```
 
-![Bob](https://ibb.co/7WLV2Df)
+<p align="center">
+  <img width="400" height="400" src="/HevORT/Images/Bob.jpg">
+</p>
