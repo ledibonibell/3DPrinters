@@ -13,4 +13,4 @@
     └─ HevORT.orca_printer          # Последняя рабочая конфигурация
 ```
 
-![Bob](/HevORT/Images/Bob.jpg)
+![Bob](https://ibb.co/7WLV2Df)
