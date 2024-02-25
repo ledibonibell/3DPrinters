@@ -11,5 +11,5 @@
 ```
 
 <p align="center">
-  <img width="400" height="400" src="/HevORT/Images/Bob.jpg">
+  <img width="400" height="400" src="/Images/Bob.jpg">
 </p>
