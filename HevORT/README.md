@@ -1,6 +1,10 @@
 # HevORT side quest
 
 ```
+├─ Extruder for Dragon/         # Уменьшеная голова для Dragon
+    ├─ HevORT - Arm.stl         # Прижим филамента
+    ├─ HevORT - Body.stl        # Основной корпус
+    └─ HevORT - Cover.stl       # Передняя крышка
 ├─ Fan/                         # Обдув для Dragon
     ├─ HevORT - FanDuct.stl     # Сопло обдува
     ├─ HevORT - FanMount.stl    # Уголок для стяжки с хотендом
