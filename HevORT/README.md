@@ -1,19 +1,18 @@
 # HevORT side quest
 
 ```
-├─ Extruder for Dragon/            # Уменьшеная голова для Dragon
-    ├─ HevORT - Arm.stl            # Прижим филамента
-    ├─ HevORT - Body.stl           # Основной корпус
-    └─ HevORT - Cover.stl          # Передняя крышка
-├─ Fan/                            # Обдув для Dragon
-    ├─ HevORT - FanDuct.stl        # Сопло обдува
-    ├─ HevORT - FanMount.stl       # Уголок для стяжки с хотендом
-    ├─ HevORT - FanPillare.stl     # Удлинитель под E3d v6
-    └─ HevORT - SimpleFan.stl      # Более продуваемый обдув
+├─ Configs/                        # Бекапы конфигов 
+    ├─ printer.txt
+    └─ bigtreetech.txt
 ├─ Other/                          # Какие-то нужные компоненты сборки
     ├─ HevORT - Belt.stl           # Стяжка ремня
-    ├─ HevORT - BLTouchDragon.stl  # Крепление тача
+    ├─ HevORT - BLTouchDragon.stl  # Крепление тача (бывшее)
     └─ HevORT - Rack.stl           # Ножки принетра под М8
+├─ HevORT - BackPlate.stl          # Передняя панель
+├─ HevORT - CarriageBody.stl       # Каретка
+├─ HevORT - E3DBody.stl            # Держатель хотенда
+├─ HevORT - Ebb42.stl              # Крепление под Ebb42 (нужно нарезать резьбу)
+├─ HevORT - FanBLTouch.stl         # Крепление вентилятора и тача (тоже режем резьбу)
 ├─ HevORT.3mf                      # Конфигурация проектом (если не работает `.orca_printer`)
 └─ HevORT.orca_printer             # Последняя рабочая конфигурация
 

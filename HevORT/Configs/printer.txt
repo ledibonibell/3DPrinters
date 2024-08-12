@@ -1,0 +1,70 @@
+[include mainsail.cfg]
+[include bigtreetech.cfg]
+
+
+[mcu]
+canbus_uuid: ec2d57d6c787
+
+
+[mcu EBBCan]
+canbus_uuid: 58b0828fc7e4
+
+
+[temperature_sensor Octopus_PRO]
+sensor_type: temperature_mcu
+min_temp: 0
+max_temp: 75
+
+
+[temperature_sensor Raspberry_PI]
+sensor_type: temperature_host
+min_temp: 0
+max_temp: 75
+
+
+[virtual_sdcard]
+path: /home/admin/printer_data/gcodes
+on_error_gcode: CANCEL_PRINT
+
+
+[bltouch]
+sensor_pin: ^EBBCan:PB8
+control_pin: EBBCan:PB9
+
+x_offset: -22.775
+y_offset: 0.0
+z_offset: 2.0
+
+speed: 5.0
+samples: 2
+samples_result: median
+probe_with_touch_mode: true
+
+
+[safe_z_home]
+home_xy_position: 240,240
+
+speed: 50
+z_hop: 10
+z_hop_speed: 5
+
+
+[bed_mesh]
+speed: 120
+horizontal_move_z: 5
+mesh_min: 30, 30
+mesh_max: 510, 510
+probe_count: 5, 3
+fade_start: 1
+fade_end: 0
+fade_target: 0
+probe_count: 10, 10
+mesh_pps: 2, 3
+algorithm: bicubic
+bicubic_tension: 0.2
+
+
+[delayed_gcode bed_mesh_init]
+initial_duration: .01
+gcode:
+ BED_MESH_PROFILE LOAD=default

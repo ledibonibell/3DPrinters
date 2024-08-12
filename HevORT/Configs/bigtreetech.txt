@@ -1,0 +1,221 @@
+# This file contains common pin mappings for the BigTreeTech SKR 3.
+# To use this config, the firmware should be compiled for the
+# STM32H743 with a "128KiB bootloader".
+
+# See docs/Config_Reference.md for a description of parameters.
+
+
+[stepper_x]
+step_pin: PC13
+dir_pin: !PF0
+enable_pin: !PF1
+microsteps: 16
+rotation_distance: 40
+endstop_pin: ^EBBCan: PB6
+position_endstop: 0
+position_max: 470
+homing_speed: 50
+homing_retract_speed:50
+homing_retract_dist: 10.0
+second_homing_speed: 10
+
+
+[stepper_y]
+step_pin: PF9
+dir_pin: !PF10
+enable_pin: !PG2
+microsteps: 16
+rotation_distance: 40
+endstop_pin: ^PG9
+position_endstop: 0
+position_max: 470
+homing_speed: 50
+homing_retract_speed:50
+homing_retract_dist: 10.0
+second_homing_speed: 10
+
+
+[stepper_z]
+step_pin: PF13
+dir_pin: PF12
+enable_pin: !PF14
+microsteps: 16
+rotation_distance: 4
+endstop_pin: probe:z_virtual_endstop
+position_min: -10
+position_max: 380
+
+
+[stepper_z1]
+step_pin: PG0
+dir_pin: PG1
+enable_pin: !PF15
+microsteps: 16
+rotation_distance: 4
+
+
+[stepper_z2]
+step_pin: PF11
+dir_pin: PG3
+enable_pin: !PG5
+microsteps: 16
+rotation_distance: 4
+
+
+[z_tilt]
+z_positions:
+    -39.288,-20.4
+    236.921,507.81
+    513.13,-20.4
+points:
+    0, 25
+    200, 470
+    460, 25
+horizontal_move_z: 15
+speed: 100
+
+
+[extruder]
+step_pin: EBBCan: PD0
+dir_pin: EBBCan: PD1
+enable_pin: !EBBCan: PD2
+microsteps: 16
+rotation_distance: 4.500
+nozzle_diameter: 0.400
+filament_diameter: 1.750
+heater_pin: EBBCan: PB13
+sensor_type: ATC Semitec 104NT-4-R025H42G
+sensor_pin: EBBCan: PA3
+
+control: pid
+pid_Kp:15.369 
+pid_Ki:0.876
+pid_Kd:67.432
+min_temp: 0
+max_temp: 320
+max_extrude_only_distance: 50000.0
+pressure_advance:0.053
+
+
+[heater_bed]
+heater_pin: bed_heater
+sensor_type: EPCOS 100K B57560G104F
+sensor_pin: PF3
+control: pid
+min_temp: 0
+max_temp: 130
+
+pid_Kp:72.144
+pid_Ki:0.477
+pid_Kd:2729.763
+
+
+[fan]
+pin: EBBCan: PA0
+
+
+[heater_fan ExtruderFan]
+pin: EBBCan: PA1
+heater: extruder
+heater_temp: 45.0
+
+
+[controller_fan DriverFan]
+max_power: 1.0
+pin: PB7
+stepper:stepper_x, stepper_y, stepper_z, stepper_z1, stepper_z2
+
+
+[controller_fan DriverFan1]
+max_power: 1.0
+pin: PB6
+stepper:stepper_x, stepper_y, stepper_z, stepper_z1, stepper_z2
+
+
+[printer]
+kinematics: corexy
+max_velocity: 500
+max_accel: 4000
+max_z_velocity: 10
+max_z_accel: 100
+
+########################################
+# EXP1 / EXP2 (display) pins
+########################################
+
+[board_pins]
+aliases:
+    # EXP1 header
+    # EXP1_1=PC5, EXP1_3=PB1, EXP1_5=PE9,  EXP1_7=PE11, EXP1_9=<GND>,
+    # EXP1_2=PB0, EXP1_4=PE8, EXP1_6=PE10, EXP1_8=PE12, EXP1_10=<5V>,
+    # EXP2 header
+    # EXP2_1=PA6, EXP2_3=PE7, EXP2_5=PB2, EXP2_7=PC4,   EXP2_9=<GND>,
+    # EXP2_2=PA5, EXP2_4=PA4, EXP2_6=PA7, EXP2_8=<RST>, EXP2_10=<NC>
+
+    bed_heater=PA1
+
+# See the sample-lcd.cfg file for definitions of common LCD displays.
+
+########################################
+# TMC2209 configuration
+########################################
+# TMC2160 то-ли не поддерживают выставление тока через плату, то-ли что-то еще, но klipper ругается на два следующих пункта
+
+
+# [tmc2160 stepper_x]
+# cs_pin: PC7
+# uart_pin: PC7
+# diag_pin: PC4
+# run_current: 1.400
+# stealthchop_threshold: 999999
+
+
+# [tmc2160 stepper_y]
+# uart_pin: PF2
+# diag_pin: PB0
+# run_current: 1.400
+# stealthchop_threshold: 999999
+
+
+[tmc2209 stepper_z]
+uart_pin: PC4
+run_current: 1.400
+stealthchop_threshold: 999999
+
+
+[tmc2209 stepper_z1]
+uart_pin: PD11
+run_current: 1.400
+stealthchop_threshold: 999999
+
+
+[tmc2209 stepper_z2]
+uart_pin: PC6
+run_current: 1.400
+stealthchop_threshold: 999999
+
+
+[tmc2209 extruder]
+uart_pin: EBBCan: PA15
+run_current: 0.8
+stealthchop_threshold: 999999
+
+
+[adxl345]
+cs_pin: EBBCan: PB12
+spi_software_sclk_pin: EBBCan: PB10
+spi_software_mosi_pin: EBBCan: PB11
+spi_software_miso_pin: EBBCan: PB2
+axes_map: -x,-z,y
+
+
+[resonance_tester]
+accel_chip: adxl345
+probe_points: 240, 240, 20
+
+
+[input_shaper]
+shaper_freq_x: 55.0
+shaper_type_x: mzv
+shaper_freq_y: 55.0
+shaper_type_y: mzv
