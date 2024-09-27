@@ -4,6 +4,8 @@
 ├─ Configs/                        # Бекапы конфигов 
     ├─ printer.txt
     └─ bigtreetech.txt
+├─ Fan/
+    └─ ...
 ├─ Other/                          # Какие-то нужные компоненты сборки
     ├─ HevORT - Belt.stl           # Стяжка ремня
     ├─ HevORT - BLTouchDragon.stl  # Крепление тача (бывшее)
