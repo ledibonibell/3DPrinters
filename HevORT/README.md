@@ -3,10 +3,14 @@
 ```
 ├─ Configs/                        # Бекапы конфигов 
     ├─ printer.txt
-    └─ bigtreetech.txt
+    ├─ bigtreetech.txt
+    ├─ HevORT.3mf                  # Конфигурация проектом (если не работает `.orca_printer`)
+    └─ HevORT.orca_printer         # Последняя рабочая конфигурация
 ├─ Fan/
-    └─ ...
-├─ Other/                          # Какие-то нужные компоненты сборки
+    ├─ HevORT - 5015.stl           # Крепление для улитки
+    ├─ HevORT - AirBlade.stl       # Направляющая обдува
+    └─ HevORT - FanStand.stl       # Держатель вентилятора
+├─ Other/
     ├─ HevORT - Belt.stl           # Стяжка ремня
     ├─ HevORT - BLTouchDragon.stl  # Крепление тача (бывшее)
     └─ HevORT - Rack.stl           # Ножки принетра под М8
@@ -17,9 +21,7 @@
 ├─ HevORT - E3DBody.stl            # Держатель хотенда
 ├─ HevORT - Ebb42.stl              # Крепление под Ebb42 (нужно нарезать резьбу)
 ├─ HevORT - FanBLTouch.stl         # Крепление вентилятора и тача (тоже режем резьбу)
-├─ HevORT - V6Holder.stl           # Поджим хотенда сверху
-├─ HevORT.3mf                      # Конфигурация проектом (если не работает `.orca_printer`)
-└─ HevORT.orca_printer             # Последняя рабочая конфигурация
+└─ HevORT - V6Holder.stl           # Поджим хотенда сверху
 
 ```
 

@@ -1,0 +1,384 @@
+[include mainsail.cfg]
+
+
+[mcu]
+serial: /dev/ttyAMA0
+baud: 250000 
+restart_method: command
+
+
+[temperature_sensor Spider_v2.2]
+sensor_type: temperature_mcu
+min_temp: 0 
+max_temp: 75
+
+
+[temperature_sensor Raspberry_PI]
+sensor_type: temperature_host
+min_temp: 0
+max_temp: 75
+
+
+[printer]
+kinematics: corexy
+max_velocity: 300
+max_accel: 3000
+max_z_velocity: 6
+max_z_accel: 15
+max_accel_to_decel: 1500
+square_corner_velocity: 5.0
+
+
+[force_move]
+enable_force_move: True
+
+
+# https://github.com/Print3DWorld/Voron2.4-FYSETCSpider/blob/main/printer.cfg
+[stepper_x]
+step_pin: PE11
+dir_pin: PE10
+enable_pin: !PE9
+rotation_distance: 32
+microsteps: 16
+full_steps_per_rotation:400
+endstop_pin: tmc2209_stepper_x:virtual_endstop
+position_min: -50
+position_endstop: -50
+position_max: 370
+homing_speed: 25
+homing_retract_dist: 0
+homing_positive_dir: false
+
+
+[tmc2209 stepper_x]
+uart_pin: PE7
+interpolate: False
+run_current: 0.9
+hold_current: 0.7
+sense_resistor: 0.110
+stealthchop_threshold: 0
+diag_pin: PB14
+driver_SGTHRS: 150
+
+
+[stepper_y]
+step_pin: PD8
+dir_pin: PB12
+enable_pin: !PD9
+rotation_distance: 32
+microsteps: 16
+full_steps_per_rotation:400
+endstop_pin: tmc2209_stepper_y:virtual_endstop
+position_min: -50
+position_endstop: -50
+position_max: 300
+homing_speed: 25
+homing_retract_dist: 0
+homing_positive_dir: false
+
+
+[tmc2209 stepper_y]
+uart_pin: PE15
+interpolate: False
+run_current: 1.1
+hold_current: 0.7
+sense_resistor: 0.110
+stealthchop_threshold: 0
+diag_pin: PB13
+driver_SGTHRS: 120
+
+
+[stepper_z1]
+step_pin: PE6
+dir_pin: PC13
+enable_pin: !PE5
+rotation_distance: 4
+microsteps: 16
+full_steps_per_rotation:200
+
+
+[tmc2209 stepper_z1]
+uart_pin: PC14
+uart_address: 0
+interpolate: True
+run_current: 1.0
+hold_current: 0.7
+sense_resistor: 0.110
+stealthchop_threshold: 0
+
+
+[stepper_z]
+step_pin: PE2
+dir_pin: PE4
+enable_pin: !PE3
+rotation_distance: 4
+microsteps: 16
+full_steps_per_rotation:200
+endstop_pin: probe:z_virtual_endstop
+position_max: 460
+position_min: -3
+homing_speed: 4
+second_homing_speed: 3
+homing_retract_dist: 4
+
+[tmc2209 stepper_z]
+uart_pin: PC15
+uart_address: 0
+interpolate: True
+run_current: 1.0
+hold_current: 0.7
+sense_resistor: 0.110
+stealthchop_threshold: 0
+
+
+[stepper_z2]
+step_pin: PD12
+dir_pin: PC4
+enable_pin: !PE8
+rotation_distance: 4
+microsteps: 16
+full_steps_per_rotation:200
+
+
+[tmc2209 stepper_z2]
+uart_pin: PA15
+uart_address: 0
+interpolate: True
+run_current: 1.0
+hold_current: 0.7
+sense_resistor: 0.110
+stealthchop_threshold: 0
+
+
+[tmc2209 extruder]
+uart_pin: PD7
+interpolate: True
+run_current: 0.5
+hold_current: 0.3
+sense_resistor: 0.110
+stealthchop_threshold: 900
+
+
+[extruder]
+step_pin: PD5
+dir_pin: PD6
+enable_pin: !PD4
+microsteps: 16
+rotation_distance: 4.5
+nozzle_diameter: 0.400
+filament_diameter: 1.750
+heater_pin: PB15
+sensor_type: Generic 3950
+sensor_pin: PC0    
+
+control: pid
+pid_kp: 35.410
+pid_ki: 3.421
+pid_kd: 91.624
+
+min_temp: 0
+max_temp: 320
+max_extrude_only_distance: 5000.0
+pressure_advance: 0.053
+
+
+[verify_heater extruder]
+max_error: 300
+#   The maximum "cumulative temperature error" before raising an
+#   error. Smaller values result in stricter checking and larger
+#   values allow for more time before an error is reported.
+#   Specifically, the temperature is inspected once a second and if it
+#   is close to the target temperature then an internal "error
+#   counter" is reset; otherwise, if the temperature is below the
+#   target range then the counter is increased by the amount the
+#   reported temperature differs from that range. Should the counter
+#   exceed this "max_error" then an error is raised. The default is
+#   120.
+check_gain_time:300     #Было 120
+#   This controls heater verification during initial heating. Smaller
+#   values result in stricter checking and larger values allow for
+#   more time before an error is reported. Specifically, during
+#   initial heating, as long as the heater increases in temperature
+#   within this time frame (specified in seconds) then the internal
+#   "error counter" is reset. The default is 20 seconds for extruders
+#   and 60 seconds for heater_bed.
+hysteresis: 5
+#   The maximum temperature difference (in Celsius) to a target
+#   temperature that is considered in range of the target. This
+#   controls the max_error range check. It is rare to customize this
+#   value. The default is 5.
+heating_gain: 20
+#   The minimum temperature (in Celsius) that the heater must increase
+#   by during the check_gain_time check. It is rare to customize this
+#   value. The default is 2.
+
+
+[heater_bed]
+heater_pin: PB4
+sensor_type: NTC 100K MGB18-104F39050L32
+sensor_pin: PB0
+
+max_power: 1
+min_temp: 0
+max_temp: 120
+
+control: pid
+pid_Kp: 28.112
+pid_Ki: 1.768
+pid_Kd: 111.746
+   # pid_kp = 58.437
+   # pid_ki = 2.347
+   # pid_kd = 363.769
+
+
+[verify_heater heater_bed]
+max_error: 300
+#   The maximum "cumulative temperature error" before raising an
+#   error. Smaller values result in stricter checking and larger
+#   values allow for more time before an error is reported.
+#   Specifically, the temperature is inspected once a second and if it
+#   is close to the target temperature then an internal "error
+#   counter" is reset; otherwise, if the temperature is below the
+#   target range then the counter is increased by the amount the
+#   reported temperature differs from that range. Should the counter
+#   exceed this "max_error" then an error is raised. The default is
+#   120.
+check_gain_time:300     #Было 120
+#   This controls heater verification during initial heating. Smaller
+#   values result in stricter checking and larger values allow for
+#   more time before an error is reported. Specifically, during
+#   initial heating, as long as the heater increases in temperature
+#   within this time frame (specified in seconds) then the internal
+#   "error counter" is reset. The default is 20 seconds for extruders
+#   and 60 seconds for heater_bed.
+hysteresis: 5
+#   The maximum temperature difference (in Celsius) to a target
+#   temperature that is considered in range of the target. This
+#   controls the max_error range check. It is rare to customize this
+#   value. The default is 5.
+heating_gain: 20
+#   The minimum temperature (in Celsius) that the heater must increase
+#   by during the check_gain_time check. It is rare to customize this
+#   value. The default is 2.
+
+
+[bltouch]
+sensor_pin: ^PA0
+control_pin: PA2
+pin_up_touch_mode_reports_triggered: False
+pin_up_reports_not_triggered: True
+
+x_offset: -22.775
+y_offset: 0.0
+z_offset: 2
+
+speed: 5.0
+samples: 3
+sample_retract_dist: 3.0
+samples_result: median
+probe_with_touch_mode: true
+
+samples_tolerance: 0.1
+samples_tolerance_retries: 3
+
+# sample_retract_dist: 3.0
+# samples_tolerance: 0.1
+# samples_tolerance_retries: 3
+
+
+[safe_z_home]
+home_xy_position = 155,175
+speed = 40
+z_hop: 10
+z_hop_speed: 3
+
+
+[bed_mesh]
+speed = 100
+horizontal_move_z = 20
+mesh_min = 0,0
+mesh_max = 290,280
+probe_count = 5,5
+algorithm = bicubic
+
+
+[z_tilt]
+z_positions: 
+    -20,50
+    155,300
+    330,50
+points: 
+    -20, 50
+    155,300
+    330,50
+horizontal_move_z: 15
+speed: 100
+retries: 3
+retry_tolerance: 0.1
+
+
+[heater_fan hotend_fan]
+pin: PA13
+max_power: 1.0
+kick_start_time: 0.5
+heater: extruder
+heater_temp: 50.0
+
+
+[fan]
+pin: PA14
+max_power: 1.0
+kick_start_time: 0.5
+off_below: 0.10
+
+
+[heater_fan controller_fan]
+pin: PB2
+kick_start_time: 0.5
+heater: heater_bed
+heater_temp: 45.0
+
+
+[gcode_macro Z_DOWN_25MM]
+gcode:
+    SET_KINEMATIC_POSITION
+    G91
+    G1 Z+25 F1500
+    G90
+
+
+[delayed_gcode bed_mesh_init]
+initial_duration: .01
+gcode:
+ BED_MESH_PROFILE LOAD=OneMap
+
+#*# <---------------------- SAVE_CONFIG ---------------------->
+#*# DO NOT EDIT THIS BLOCK OR BELOW. The contents are auto-generated.
+#*#
+#*# [extruder]
+#*#
+#*# [stepper_z]
+#*# position_endstop = 0.040
+#*#
+#*# [bltouch]
+#*#
+#*# [heater_bed]
+#*#
+#*# [bed_mesh OneMap]
+#*# version = 1
+#*# points =
+#*# 	  -0.041250, -0.096250, -0.080000, -0.066250, 0.018750
+#*# 	  0.027500, -0.045000, -0.042500, -0.036250, 0.011250
+#*# 	  0.098750, 0.005000, -0.012500, -0.023750, 0.006250
+#*# 	  0.157500, 0.057500, 0.016250, 0.002500, 0.016250
+#*# 	  0.267500, 0.120000, 0.066250, 0.015000, 0.006250
+#*# tension = 0.2
+#*# min_x = 0.0
+#*# algo = bicubic
+#*# y_count = 5
+#*# mesh_y_pps = 2
+#*# min_y = 0.0
+#*# x_count = 5
+#*# max_y = 280.0
+#*# mesh_x_pps = 2
+#*# max_x = 290.0
